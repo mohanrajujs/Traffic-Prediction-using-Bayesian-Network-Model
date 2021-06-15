@@ -1,4 +1,5 @@
-# Traffic-Prediction-using-Bayesian-Network-Model ITC - University of Twente, Netherlands (Master Thesis | 2020)
+# Traffic-Prediction-using-Bayesian-Network-Model 
+### ITC - University of Twente, Netherlands (Master Thesis | 2020)
 ## About
 As part of my academic master thesis, submitted to the faculty of Geo-Information Science and Earth Observation, Earth Observation Department, ITC-University of Twente.
 ### The entire work flow is categorised into various different sections.
