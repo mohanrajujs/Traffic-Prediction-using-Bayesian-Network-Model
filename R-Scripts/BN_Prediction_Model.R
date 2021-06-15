@@ -1,0 +1,30 @@
+library(readxl)
+library(bnlearn)
+library(forecast)
+data1 = Time_Wise_2020_D1_Cont
+data3 = data.frame(data1)
+abc = data3[1:200, ]
+def = data3[201:743, ]
+pdag = hc(abc)
+pdag
+plot(pdag)
+dag = set.arc(pdag, from = "Vehicle_Cat", to = "Average_Intensity")
+dag2 = set.arc(dag, from = "Time.of.the.day", to = "Average_Intensity")
+dag3 = drop.arc(dag2, from = "Day.in.a.week", to = "Average_Speed")
+dag4 = drop.arc(dag3, from = "Day.in.a.week", to = "Week_Day_Week_End")
+dag5 = set.arc(dag4, from = "Day.in.a.week", to ="Average_Speed")
+dag6 = set.arc(dag5, from = "Week_Day_Week_End", to = "Average_Time")
+dag7 = set.arc(dag6, from = "Average_Time", to = "Average_Intensity")
+dag8 = set.arc(dag7, from = "Average_Time", to = "Average_Speed")
+dag9 = set.arc(dag8, from = "Average_Speed", to = "Average_Intensity")
+options(max.print=1000000)
+dag9
+plot(dag9)
+fitttted = bn.fit(dag9, abc)
+pred = predict(fitttted, "Average_Intensity", def)
+#cbind(pred, def[, "Average_Intensity"])
+cbind(predicted =pred, actual = def[, "Average_Intensity"])
+accuracy(forecast(pred))
+accuracy(f = pred, x = def[, "Average_Intensity"])
+accuracy(forecast(def$Average_Intensity))
+accuracy(forecast(abc$Average_Intensity))
